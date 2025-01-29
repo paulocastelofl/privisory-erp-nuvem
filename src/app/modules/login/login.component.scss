@@ -1,0 +1,67 @@
+.login-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    border-radius: 1rem;
+}
+
+.card-img-left {
+    width: 100%;
+    /* Largura do lado esquerdo */
+    height: 500px;
+    /* Altura total do card */
+    background-size: cover;
+    /* Ajusta a imagem para cobrir o espaço */
+    background-position: center;
+    /* Centraliza a imagem */
+    background-repeat: no-repeat;
+    /* Evita repetição da imagem */
+
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.img-logo {
+    width: 50%;
+}
+
+.btn {
+    border-radius: .5rem;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 50px;
+    cursor: pointer;
+    font-weight: bold;
+    align-self: center;
+    border: none;
+    width: 100%;
+}
+
+.btn-primary {
+    font-size: 18px;
+    background-color: transparent;
+    border: 1px solid #fff;
+    transition: background-color .5s;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #1E293B;
+}
+
+.btn-second {
+    background-color: #1E293B;
+    border: 1px solid #1E293B;
+    transition: background-color .5s;
+}
+
+.btn-second:hover {
+    background-color: #fff;
+    border: 1px solid #1E293B;
+    color: #1E293B;
+}

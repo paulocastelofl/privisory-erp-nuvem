@@ -1,0 +1,64 @@
+<div class="login-card">
+    <div class="card">
+        <div class="row g-0">
+            <!-- Lado esquerdo com a imagem -->
+            <div class="col-md-8">
+                <img src="../../../assets/images/erp-cloud.jpg" class="card-img-left" alt="Imagem de Login">
+            </div>
+
+            <!-- Lado direito com os inputs -->
+            <div class="col-md-4">
+                <div class="card-body">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; row-gap: 1.5rem;">
+                        <img src="../../../assets/images/nuvem3_logo.png" class="img-logo text-center"
+                            alt="Imagem de Logo">
+                        <h2 class="card-title text-center">Seja bem vindo!</h2>
+                    </div>
+
+                    <form class="col-md-12 form" [formGroup]="form"
+                        style="display: flex; flex-direction: column; justify-content: center;">
+                        <div class="form-group mt-4">
+                            <input type="text" class="form-control" id="codenterprise" placeholder="Cód. Empresa"
+                                formControlName="codenterprise">
+
+                            <div class="text-danger"
+                                *ngIf="form.get('codenterprise')?.touched && form.get('codenterprise')?.invalid">
+                                <small *ngIf="form.get('codenterprise')?.errors?.['required']">Código é
+                                    obrigatória.</small>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4">
+                            <input type="email" class="form-control" id="name" aria-describedby="emailHelp"
+                                placeholder="Usuário" formControlName="name">
+
+                            <div class="text-danger" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+                                <small *ngIf="form.get('name')?.errors?.['required']">Usuário é obrigatório.</small>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4">
+                            <input type="password" class="form-control" id="senha" placeholder="Senha"
+                                formControlName="password">
+
+                            <div class="text-danger"
+                                *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+                                <small *ngIf="form.get('password')?.errors?.['required']">Senha é obrigatória.</small>
+                                <small *ngIf="form.get('password')?.errors?.['minlength']">
+                                    A senha deve ter pelo menos 8 caracteres.
+                                </small>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-second mt-4" (click)="gotLogin()">
+                            <div *ngIf="showLoading" class="spinner-border spinner-border-sm text-light" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <span *ngIf="!showLoading">
+                                Entrar
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

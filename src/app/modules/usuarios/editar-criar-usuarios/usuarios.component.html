@@ -1,0 +1,236 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-12">
+        <!-- Page header -->
+        <div
+            class="border-bottom pb-3 mb-4 d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between">
+            <div class="d-flex flex-column gap-1">
+                <h1 class="mb-0 h2 fw-bold">{{title}} Usuário</h1>
+            </div>
+            <!-- button -->
+        </div>
+    </div>
+</div>
+<div class="py-12">
+    <!-- row -->
+    <div class="row">
+        <div class="offset-xl-1 col-xl-10 col-md-12 col-12">
+            <!-- card -->
+            <div class="card">
+                <!-- card body -->
+                <div class="card-body p-lg-6">
+                    <!-- form -->
+                    <form class="row gx-3 needs-validation form" [formGroup]="form" novalidate>
+                        <!-- form group -->
+                        <div class="mb-4 col-6">
+                            <label class="form-label">
+                                Nome
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" required formControlName="Nome" />
+
+                            <div class="text-danger" *ngIf="form.get('Nome')?.touched && form.get('Nome')?.invalid">
+                                <small *ngIf="form.get('Nome')?.errors?.['required']">Nome é obrigatório.</small>
+                            </div>
+                        </div>
+                        <!-- form group -->
+                        <div class="mb-4 col-4">
+                            <label class="form-label">
+                                Login
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" required formControlName="LoginUsuario" />
+                            <div class="text-danger"
+                                *ngIf="form.get('LoginUsuario')?.touched && form.get('LoginUsuario')?.invalid">
+                                <small *ngIf="form.get('LoginUsuario')?.errors?.['required']">Usuário é
+                                    obrigatório.</small>
+                            </div>
+                        </div>
+                        <div class="mb-4 col-2">
+                            <div class="d-flex flex-column">
+                                <label class="form-check-label mb-1" for="exampleCheck1">Ativo:</label>
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            </div>
+                        </div>
+                        <!-- form group -->
+                        <div class="mb-4 col-6">
+                            <label class="form-label">
+                                Senha
+                                <span class="text-danger" *ngIf="isFieldRequired('Senha')">*</span>
+                            </label>
+                            <input type="password" class="form-control" required formControlName="Senha" />
+                            <div class="text-danger" *ngIf="form.get('Senha')?.touched && form.get('Senha')?.invalid">
+                                <small *ngIf="form.get('Senha')?.errors?.['required']">Senha é obrigatória.</small>
+                                <small *ngIf="form.get('Senha')?.errors?.['minlength']">
+                                    A senha deve ter pelo menos 8 caracteres.
+                                </small>
+                            </div>
+                        </div>
+                        <!-- form group -->
+                        <div class="mb-4 col-6">
+                            <label class="form-label">
+                                Confirmar Senha
+                                <span class="text-danger" *ngIf="isFieldRequired('Senha')">*</span>
+                            </label>
+                            <input type="password" class="form-control" required formControlName="Senha" />
+                            <div class="text-danger" *ngIf="form.get('Senha')?.touched && form.get('Senha')?.invalid">
+                                <small *ngIf="form.get('Senha')?.errors?.['required']">Senha é obrigatória.</small>
+                                <small *ngIf="form.get('Senha')?.errors?.['minlength']">
+                                    A senha deve ter pelo menos 8 caracteres.
+                                </small>
+                            </div>
+                        </div>
+
+                        <!-- form group -->
+                        <div class="mb-4 col-md-3 col-12">
+                            <label class="form-label">
+                                Comissão de Vendas (%):
+                            </label>
+                            <div class="input-group me-3">
+                                <input class="form-control" aria-describedby="basic-addon3" formControlName="Telefone"
+                                    mask="(00) 0 0000 0000" prefix="+55 " type="tel" />
+                            </div>
+                        </div>
+
+                        <!-- form group -->
+                        <div class="mb-4 col-md-3 col-12">
+                            <label class="form-label">
+                                Limite de Desconto (%):
+                            </label>
+                            <div class="input-group me-3">
+                                <input class="form-control" aria-describedby="basic-addon3" formControlName="Telefone"
+                                    mask="(00) 0 0000 0000" prefix="+55 " type="tel" />
+                            </div>
+                        </div>
+
+                        <!-- form group -->
+                        <div class="mb-4 col-md-3 col-12">
+                            <label class="form-label">
+                                Telefone:
+                            </label>
+                            <div class="input-group me-3">
+                                <input class="form-control" aria-describedby="basic-addon3" formControlName="Telefone"
+                                    mask="(00) 0 0000 0000" prefix="+55 " type="tel" />
+                            </div>
+                        </div>
+
+                        <!-- form group -->
+                        <div class="mb-4 col-md-3 col-12">
+                            <label class="form-label">
+                                Salário Mensal:
+                            </label>
+                            <div class="input-group me-3">
+                                <input class="form-control" type="text" aria-describedby="basic-addon3"
+                                    formControlName="Cpf" mask="000.000.000-00" inputmode="numeric"
+                                    placeholder="R$ 0,00" />
+                            </div>
+                        </div>
+
+                        <!-- form group -->
+                        <div class="mb-4 col-md-3 col-12">
+                            <label class="form-label">
+                                RG:
+                            </label>
+                            <div class="input-group me-3">
+                                <input class="form-control" type="text" aria-describedby="basic-addon3"
+                                    formControlName="Rg" mask="00.000.000-0" inputmode="numeric" placeholder="RG" />
+                            </div>
+                        </div>
+
+                        <!-- form group -->
+                        <div class="mb-4 col-md-3 col-12">
+                            <label class="form-label">
+                                CPF:
+                            </label>
+                            <div class="input-group me-3">
+                                <input class="form-control" type="text" aria-describedby="basic-addon3"
+                                    formControlName="Cpf" mask="000.000.000-00" inputmode="numeric" placeholder="CPF" />
+                            </div>
+                        </div>
+
+                        <!-- form group -->
+                        <div class="mb-4 col-md-12 col-12">
+                            <label class="form-label">
+                                Endereço:
+                            </label>
+                            <div class="input-group me-3">
+                                <input class="form-control" type="text" aria-describedby="basic-addon3" />
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex" style="column-gap: 3rem;">
+                            <div class="mb-4">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1" for="exampleCheck1">Usuário Master:</label>
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1" for="exampleCheck1">É Vendedor:</label>
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1" for="exampleCheck1">É Entregador:</label>
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1" for="exampleCheck1">É Técnico:</label>
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1" for="exampleCheck1">Usa PDV Como
+                                        utilitário:</label>
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1" for="exampleCheck1">Comanda Eletrônica:</label>
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1" for="exampleCheck1">É Totem:</label>
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- form group -->
+                        <div class="mb-4 mt-2 col-12">
+                            <label class="form-label">Observações:</label>
+                            <textarea class="form-control" rows="3" formControlName="Observacoes"></textarea>
+                        </div>
+                    </form>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="javascript:void(0)" (click)="goNewUsuario()" class="btn btn-success me-2">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Novo
+                            </a>
+                            <a href="javascript:void(0)" (click)="createOrEdtitUsuario()" class="btn btn-primary me-2">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Gravar
+                            </a>
+
+                            <a href="javascript:void(0)" (click)="goToBack()" class="btn btn-primary me-2"><i
+                                    class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>
+                        </div>
+                        <div>
+                            <a href="javascript:void(0)" (click)="goToBack()" class="btn btn-danger me-2"><i
+                                    class="fa fa-trash-o" aria-hidden="true"></i> Excluir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
