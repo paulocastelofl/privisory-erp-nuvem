@@ -17,6 +17,13 @@ import { DataTablesSettingsDirective } from './shared/directives/data-tables-set
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CurrencyMaskModule } from "ng2-currency-mask";
+import { ListarProdutosComponent } from './modules/produtos/listar-produtos/listar-produtos.component';
+import { EditarCriarProdutosComponent } from './modules/produtos/editar-criar-produtos/editar-criar-produtos.component';
+import { EditarCriarFormasPagamentoComponent } from './modules/formas-pagamento/editar-criar-formas-pagamento/editar-criar-formas-pagamento.component';
+import { ListarFormasPagamentoComponent } from './modules/formas-pagamento/listar-formas-pagamento/listar-formas-pagamento.component';
+import { ListarRecebimentoNfeComponent } from './modules/recebimento-nfe/listar-recebimento-nfe/listar-recebimento-nfe.component';
+import { EditarCriarRecebimentoNfeComponent } from './modules/recebimento-nfe/editar-criar-recebimento-nfe/editar-criar-recebimento-nfe.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +36,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UsuariosComponent,
     ListarUsuariosComponent,
     DataTablesSettingsDirective,
+    ListarProdutosComponent,
+    EditarCriarProdutosComponent,
+    EditarCriarFormasPagamentoComponent,
+    ListarFormasPagamentoComponent,
+    ListarRecebimentoNfeComponent,
+    EditarCriarRecebimentoNfeComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +52,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     NgxMaskDirective,
     NgxMaskPipe,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    CurrencyMaskModule
   ],
   providers: [
     provideNgxMask(),

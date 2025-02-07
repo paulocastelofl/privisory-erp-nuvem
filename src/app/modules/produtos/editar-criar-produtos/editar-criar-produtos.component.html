@@ -1,0 +1,235 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-12">
+        <!-- Page header -->
+        <div
+            class="border-bottom pb-3 mb-4 d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between">
+            <div class="d-flex flex-column gap-1">
+                <h1 class="mb-0 h2 fw-bold">{{title}} Produto</h1>
+            </div>
+            <!-- button -->
+        </div>
+    </div>
+</div>
+<div class="py-12">
+    <div class="py-12">
+        <!-- row -->
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-12 col-12">
+                <div class="d-flex flex-column gap-4">
+                    <!-- Card -->
+                    <div class="card">
+                        <!-- Card Header -->
+                        <div class="card-header d-lg-flex">
+                            <h4 class="mb-0">Registros</h4>
+                        </div>
+                        <!-- List Group -->
+                        <ul class="list-group list-group-flush">
+                            <ng-container *ngFor="let tab of tabs">
+                                <li class="list-group-item" (click)="selectTab(tab)"
+                                    [ngClass]="{'text-lb-select': tab === tabsSelected}" style="cursor: pointer;">
+                                    <span class="text-body">{{tab.nome}}</span>
+                                </li>
+                            </ng-container>
+                        </ul>
+                        <!-- Card -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-8 col-md-12 col-12">
+                <!-- card -->
+                <div class="card">
+                    <!-- card body -->
+                    <div class="card-body p-lg-6">
+                        <div [ngSwitch]="tabsSelected.id">
+                            <ng-container *ngSwitchCase="'#DadosGerais'">
+                                <form class="row gx-3 needs-validation form" [formGroup]="form" novalidate>
+                                    <!-- form group -->
+                                    <div class="mb-4 col-12">
+                                        <label class="form-label">
+                                            Nome produto
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" required
+                                            formControlName="NomeProduto" />
+
+                                        <div class="text-danger"
+                                            *ngIf="form.get('NomeProduto')?.touched && form.get('NomeProduto')?.invalid">
+                                            <small *ngIf="form.get('NomeProduto')?.errors?.['required']">Nome Produto é
+                                                obrigatório.</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 col-3">
+                                        <label class="form-label">
+                                            Código Barras
+                                        </label>
+                                        <input type="text" class="form-control" 
+                                            formControlName="CodigoBarras" />
+                                    </div>
+                                    <div class="mb-4 col-3">
+                                        <label class="form-label">
+                                            Código Interno
+                                        </label>
+                                        <input type="text" class="form-control" 
+                                            formControlName="CodigoInterno" />
+                                    </div>
+                                    <div class="mb-4 col-3">
+                                        <label class="form-label">
+                                            Unidade Tributável
+                                        </label>
+                                        <select class="form-select" formControlName="UnidadeTributavel">
+                                            <option [value]="null">Selecione</option>
+                                            <option *ngFor="let item of produtoUnidades" [value]="item.sigla">
+                                                {{item.descricao}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4 col-3">
+                                        <label class="form-label">
+                                            Ncm
+                                        </label>
+                                        <input type="text" class="form-control" formControlName="Ncm" />
+                                    </div>
+
+                                    <div class="mb-4 col-3">
+                                        <label class="form-label">
+                                            Preço Custo
+                                        </label>
+                                        <input type="text" class="form-control" formControlName="PrecoCusto"
+                                            currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                            placeholder="R$ 0,00" />
+
+                                        
+                                    </div>
+                                    <div class="mb-4 col-3">
+                                        <label class="form-label">
+                                            Margem (%)
+                                        </label>
+                                        <input class="form-control"  formControlName="PercentualMargemLucro"
+                                            currencyMask type="text"
+                                            [options]="{ prefix: '', suffix: '%', thousands: '.', decimal: ',' }" />
+
+                                    </div>
+                                    <div class="mb-4 col-3">
+                                        <label class="form-label">
+                                            Preço Venda
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" required formControlName="PrecoVenda"
+                                            currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+                                            placeholder="R$ 0,00" />
+
+                                        <div class="text-danger"
+                                            *ngIf="form.get('PrecoVenda')?.touched && form.get('PrecoVenda')?.invalid">
+                                            <small *ngIf="form.get('PrecoVenda')?.errors?.['required']">Preço venda é
+                                                obrigatório.</small>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 col-2">
+                                        <div class="d-flex flex-column">
+                                            <label class="form-check-label mb-1" for="checkAtivo">Ativo:</label>
+                                            <input type="checkbox" class="form-check-input" id="checkAtivo"
+                                                formControlName="Ativo">
+                                        </div>
+                                    </div>
+                                </form>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'#FotosArquivos'">
+                                <div *ngIf="!hash" class="container mt-4">
+                                    <h3 class="mb-3">Upload de fotos</h3>
+                                    <span>OBS: Antes de inserir as fotos, salve o produto!</span>
+                                </div>
+                                <div *ngIf="hash" class="container mt-4">
+                                    <h3 class="mb-3">Upload de fotos</h3>
+
+                                    <!-- Área de Drop -->
+                                    <div class="drop-area border p-5 text-center" (dragover)="onDragOver($event)"
+                                        (drop)="onFileDropped($event)">
+                                        <p class="text-muted">Arraste os arquivos aqui ou clique para selecionar</p>
+                                        <input type="file" (change)="onFileSelected($event)" class="d-none"
+                                            id="fileInput" multiple>
+                                        <label for="fileInput" class="btn btn-primary">Selecionar Arquivos</label>
+                                    </div>
+
+                                    <!-- Exibição dos Arquivos -->
+                                    <div *ngIf="files.length > 0" class="mt-3">
+                                        <h5>Arquivos Selecionados:</h5>
+                                        <div *ngFor="let file of files; let i = index"
+                                            class="alert alert-success d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                <img *ngIf="file.preview" [src]="file.preview"
+                                                    class="img-thumbnail me-2" style="width: 50px; height: 50px;">
+                                                {{ file.name }}
+                                            </div>
+                                            <button class="btn btn-danger btn-sm" (click)="removeFile(i)">X</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mt-4">
+                                        <div></div>
+                                        <div *ngIf="files.length > 0">
+                                            <a href="javascript:void(0)" (click)="uploadFiles()"
+                                                class="btn btn-primary" style="width: 100px;">
+                                                <div *ngIf="showLoadingUpload"
+                                                    class="spinner-border spinner-border-sm text-light" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                </div>
+                                                <span *ngIf="!showLoadingUpload">
+                                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Upload
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Exibição dos Arquivos -->
+                                    <div *ngIf="produto?.produtofotos!.length > 0" class="mt-3">
+                                        <h5>Arquivos Salvos:</h5>
+                                        <div *ngFor="let foto of produto?.produtofotos!; let i = index"
+                                            class="alert alert-primary d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center">
+                                                <img *ngIf="foto.nomeArquivo" [src]="foto.nomeArquivo" class="img-thumbnail me-2"
+                                                    style="width: 50px; height: 50px;">
+                                                {{ getFileNameFromPath(foto.nomeArquivo ?? "") }}
+                                            </div>
+                                            <button class="btn btn-danger btn-sm" (click)="removeProdutoFoto(foto)">X</button>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngSwitchDefault>
+                            </ng-container>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <div>
+                                <a href="javascript:void(0)" (click)="goNewProduto()" class="btn btn-success me-2"
+                                    style="width: 100px;">
+                                    <i class="fa fa-plus" aria-hidden="true"></i> Novo
+                                </a>
+
+                                <a href="javascript:void(0)" (click)="createOrEdtitProduto()"
+                                    class="btn btn-primary me-2" style="width: 100px;">
+                                    <div *ngIf="showLoading" class="spinner-border spinner-border-sm text-light"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <span *ngIf="!showLoading">
+                                        <i class="fa fa-floppy-o" aria-hidden="true"></i> Gravar
+                                    </span>
+                                </a>
+
+                                <a href="javascript:void(0)" (click)="goToBack()" class="btn btn-primary me-2"
+                                    style="width: 100px;"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    Voltar</a>
+                            </div>
+                            <div *ngIf="hash">
+                                <a href="javascript:void(0)" (click)="removeProduto()" class="btn btn-danger me-2"
+                                    style="width: 100px;"><i class="fa fa-trash-o" aria-hidden="true"></i> Excluir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

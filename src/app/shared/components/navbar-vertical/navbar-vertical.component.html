@@ -1,8 +1,8 @@
-<nav class="navbar-vertical navbar">
+<nav class="navbar-vertical navbar" [ngClass]="{'nav-controller-menu': !hasOpenOrClose, 'nav-controller-menu-open': hasOpenOrClose}">
     <div class="vh-100" data-simplebar>
         <!-- Brand logo -->
-        <a class="navbar-brand" href="../index.html">
-            <img src="../assets/images/brand/logo/logo-inverse.svg" alt="Geeks" />
+        <a class="navbar-brand" href="../index.html" style="text-align: center;">
+            <img src="../../../../assets/images/nuvem3_logo.png" alt="Logo" />
         </a>
         <!-- Navbar nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">
@@ -12,10 +12,10 @@
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                         [attr.data-bs-target]="'#navMenu' + i" aria-expanded="false"
                         [attr.aria-controls]="'navMenu' + i">
-                        <i [ngClass]="'fa '+menu.icone" aria-hidden="true" [style.padding-right.rem]=".5"></i>
-                        {{capitalizeFirstLetter(menu.titulo ?? "")}}
+                        <i [ngClass]="'fa '+menu.icone+' fa-lg'" aria-hidden="true" [style.padding-right.rem]=".5"></i>
+                        {{menu.titulo ?? ""}}
                     </a>
-                    <div [id]="'navMenu' + i" class="collapse" data-bs-parent="#sideNavbar">
+                    <div [id]="'navMenu' + i" class="collapse" data-bs-parent="#sideNavbar" style="background-color: #374151 ;">
                         <ul class="nav flex-column">
                             <li *ngFor="let submenu of menu.submenu; let j = index" class="nav-item">
                                 
@@ -29,15 +29,15 @@
                                         <ul class="nav flex-column">
                                             <li *ngFor="let subsubmenu of submenu.subMenus" class="nav-item">
                                                 <a class="nav-link" [routerLink]="[subsubmenu.url]">
-                                                    {{capitalizeFirstLetter(subsubmenu.titulo ?? "")}}
+                                                     {{capitalizeFirstLetter(subsubmenu.titulo ?? "")}}
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
                                 </ng-container>
                                 <ng-template #hasNotSubmenu>
-                                    <a class="nav-link" [routerLink]="[submenu.url]">
-                                        {{capitalizeFirstLetter(submenu.titulo ?? "")}}
+                                    <a class="nav-link lb-submenu" [routerLink]="[submenu.url]">
+                                        <i class="fa fa-arrow-circle-right" aria-hidden="true" style="padding-right: .2rem;"></i> {{capitalizeFirstLetter(submenu.titulo ?? "")}} 
                                     </a>
                                 </ng-template>
                             </li>
@@ -46,8 +46,8 @@
                 </ng-container>
                 <ng-template #hasNotSubmenu>
                     <a class="nav-link" [href]="menu.url">
-                        <i [ngClass]="'fa '+menu.icone" aria-hidden="true" [style.padding-right.rem]=".5"></i>
-                        {{capitalizeFirstLetter(menu.titulo ?? "")}}
+                        <i [ngClass]="'fa '+menu.icone+' fa-lg'" aria-hidden="true" [style.padding-right.rem]=".5"></i>
+                        {{menu.titulo ?? ""}}
                     </a>
                 </ng-template>
             </li>

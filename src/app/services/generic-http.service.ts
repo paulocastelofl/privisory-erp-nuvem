@@ -106,11 +106,30 @@ export class GenericHttpService<T> {
     );
   }
 
-  getDataTableResponse(tableQuery: any): Promise<IDataTablesResponse | undefined> {
-    return this.http.post<IDataTablesResponse>(`${this.apiUrl}/usuarios/DataTableUsuarios`, tableQuery)
+  getDataTableResponse(tableQuery: any, endpoint: string): Promise<IDataTablesResponse | undefined> {
+    return this.http.post<IDataTablesResponse>(`${this.apiUrl}${endpoint}`, tableQuery)
       .pipe(
         retry(1)
       ).toPromise();
+  }
+
+  postFile(endpoint: string, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.forEach((value, key) => {
+    });
+
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.post<any>(url, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  postFileFormData(endpoint: string, formData: FormData): Observable<any> {
+    const url = `${this.apiUrl}/${endpoint}`;
+    return this.http.post<any>(url, formData).pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

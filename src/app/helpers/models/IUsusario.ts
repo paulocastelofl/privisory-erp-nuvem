@@ -18,5 +18,9 @@ export interface IUsuario {
     telefone?: string,
     observacoes?:string,
     rg?: string,
-    cpf?: string
+    cpf?: string,
+    endereco?: string,
+    salarioMensal?: number
+    comissaoVendas?: number
+    percentualLimiteDesconto?: number
 }

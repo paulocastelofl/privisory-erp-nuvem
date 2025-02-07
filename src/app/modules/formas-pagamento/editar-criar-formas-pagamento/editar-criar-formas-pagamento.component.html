@@ -1,0 +1,264 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-12">
+        <!-- Page header -->
+        <div
+            class="border-bottom pb-3 mb-4 d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between">
+            <div class="d-flex flex-column gap-1">
+                <h1 class="mb-0 h2 fw-bold">{{title}} Forma de Pagamento</h1>
+            </div>
+            <!-- button -->
+        </div>
+    </div>
+</div>
+<div class="py-12">
+    <!-- row -->
+    <div class="row">
+        <div class="offset-xl-1 col-xl-10 col-md-12 col-12">
+            <!-- card -->
+            <div class="card">
+                <!-- card body -->
+                <div class="card-body p-lg-6">
+                    <!-- form -->
+                    <form class="row gx-3 needs-validation form" [formGroup]="form" novalidate>
+                        <!-- form group -->
+                        <div class="mb-4 col-10">
+                            <label class="form-label">
+                                Descrição
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" required formControlName="Descricao" />
+
+                            <div class="text-danger"
+                                *ngIf="form.get('Descricao')?.touched && form.get('Descricao')?.invalid">
+                                <small *ngIf="form.get('Descricao')?.errors?.['required']">Descrição é
+                                    obrigatório.</small>
+                            </div>
+                        </div>
+                        <!-- form group -->
+                        <div class="mb-4 col-2">
+                            <label class="form-label">
+                                Ordem
+                            </label>
+                            <input type="number" class="form-control" formControlName="Ordem" />
+                        </div>
+                        <!-- form group -->
+                        <div class="mb-4 col-5">
+                            <label class="form-label">
+                                Meio de Pagamento CFe:
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-select" formControlName="MeioPagamentoCFe">
+                                <option [value]="null">Selecione</option>
+                                <option *ngFor="let item of formasDePagamento" [value]="item.value">{{item.label}}</option>
+                            </select>
+                            <div class="text-danger" *ngIf="form.get('MeioPagamentoCFe')?.touched && form.get('MeioPagamentoCFe')?.invalid">
+                                <small *ngIf="form.get('MeioPagamentoCFe')?.errors?.['required']">Meio de Pagamento é obrigatório.</small>
+                            </div>
+                        </div>
+                        <!-- form group -->
+                        <div class="mb-4 col-2">
+                            <label class="form-label">
+                                Valor da Taxa em (%):
+                            </label>
+                            <input type="text" class="form-control" formControlName="ValorTaxa" currencyMask
+                                [options]="{ prefix: '', suffix: '%', thousands: '.', decimal: ',' }" />
+                        </div>
+                        <!-- form group -->
+                        <div class="mb-4 col-5">
+                            <label class="form-label">
+                                Tipo de Pin Pad:
+                            </label>
+                            <select class="form-select" formControlName="TipoPinPad">
+                                <option [value]="null">Selecione</option>
+                                <option *ngFor="let item of tipoPinPad" [value]="item.value">{{item.label}}</option>
+                            </select>
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1">Sempre Zerado no Pdv:</label>
+                                    <input type="checkbox" class="form-check-input" formControlName="EhSempreZeradoPdv">
+                                </div>
+                            </div>
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1"> É Cheque?:</label>
+                                    <input type="checkbox" class="form-check-input" formControlName="EhCheque">
+                                </div>
+                            </div>
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1">Lança Quitada:</label>
+                                    <input type="checkbox" class="form-check-input" formControlName="EhLancaQuitada">
+                                </div>
+                            </div>
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1">Permite Troco?</label>
+                                    <input type="checkbox" class="form-check-input" formControlName="EhPermiteTroco">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1">Exige Pessoa?</label>
+                                    <input type="checkbox" class="form-check-input" formControlName="EhExigePessoa">
+                                </div>
+                            </div>
+
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1"> É Boleto?</label>
+                                    <input type="checkbox" class="form-check-input" formControlName="EhBoleto">
+                                </div>
+                            </div>
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1">Ativa:</label>
+                                    <input type="checkbox" class="form-check-input" formControlName="EhAtiva">
+                                </div>
+                            </div>
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1">Abrir Gaveta de Dinheiro:</label>
+                                    <input type="checkbox" class="form-check-input"
+                                        formControlName="EhAbrirGavetaDinheiro">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex row">
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1">Permitir Parecelar:</label>
+                                    <input type="checkbox" class="form-check-input" formControlName="PermitirParcelar">
+                                </div>
+                            </div>
+                            <!-- form group -->
+                            <div class="mb-4 col-2" *ngIf="hasPermitirParcelar">
+                                <label class="form-label">
+                                    Qtd. Parcelas:
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="number" class="form-control" required formControlName="QtdParcelas" />
+                            </div>
+                        </div>
+                        <div class="d-flex row" *ngIf="formValoresTaxa.controls.length > 0">
+                            <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd;">
+                                <table class="table table-striped" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Parcela</th>
+                                            <th>Valor da Taxa em (%)</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container *ngFor="let item of formValoresTaxa.controls; let i=index">
+                                            <ng-container formArrayName="ValoresTaxa">
+                                                <tr [formGroupName]="i">
+                                                    <td>
+                                                        <span>Parcela {{(i + 1)}}</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" formControlName="Taxa"
+                                                            currencyMask
+                                                            [options]="{ prefix: '', suffix: '%', thousands: '.', decimal: ',' }"
+                                                            style="width: 200px; height: 36px;" />
+                                                    </td>
+                                                    <td>
+                                                        <span (click)="removeValorTaxa(i)"
+                                                            style="color: red; cursor: pointer;">
+                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </ng-container>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="d-flex row mt-4">
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1">Usa no Menu Digital?</label>
+                                    <input type="checkbox" class="form-check-input" formControlName="UsaMenuDigital">
+                                </div>
+                            </div>
+                            <!-- form group -->
+                            <div class="mb-4 col-3" *ngIf="hasUsaMenuDigital">
+                                <label class="form-label">
+                                    Tipo de Pagamento (Menu Digital):
+                                </label>
+                                <select class="form-select" formControlName="TipoPagamentoMenuDigital">
+                                    <option [value]="null">Selecione</option>
+                                    <option *ngFor="let item of tipoMenuDigital" [value]="item.value">{{item.label}}</option>
+                                </select>
+                            </div>
+                            <div class="mb-4 col-6" *ngIf="hasUsaMenuDigital">
+                                <label class="form-label">
+                                    Observação (Menu Digital):
+                                </label>
+                                <input type="text" class="form-control"
+                                    formControlName="ObservacaoMenuDigital" />
+                            </div>
+                        </div>
+                        <div class="d-flex row">
+                            <div class="mb-4 col-2">
+                                <div class="d-flex flex-column">
+                                    <label class="form-check-label mb-1">Gera QR Code (Pix)?</label>
+                                    <input type="checkbox" class="form-check-input" formControlName="GeraQRCodePix">
+                                </div>
+                            </div>
+                            <!-- form group -->
+                            <div class="mb-4 col-3" *ngIf="hasGeraQRCodePix">
+                                <label class="form-label">
+                                    Plataforma de Pagamento (PIX):
+                                </label>
+                                <select class="form-select" formControlName="PlataformaPagamentoPIX">
+                                    <option [value]="null">Selecione</option>
+                                    <option *ngFor="let item of tipoGeraQRCodePix" [value]="item.value">{{item.label}}</option>
+                                </select>
+                            </div>
+                            <div class="mb-4 col-6" *ngIf="hasGeraQRCodePix">
+                                <label class="form-label">
+                                    Access Token (PIX):
+                                </label>
+                                <input type="text" class="form-control" formControlName="AccessTokenPIX" />
+                            </div>
+                        </div>
+                    </form>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="javascript:void(0)" (click)="goNewFormaPagemento()" class="btn btn-success me-2"
+                                style="width: 100px;">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Novo
+                            </a>
+
+                            <a href="javascript:void(0)" (click)="createOrEditFormaPagamento()"
+                                class="btn btn-primary me-2" style="width: 100px;">
+                                <div *ngIf="showLoading" class="spinner-border spinner-border-sm text-light"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <span *ngIf="!showLoading">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Gravar
+                                </span>
+                            </a>
+
+                            <a href="javascript:void(0)" (click)="goToBack()" class="btn btn-primary me-2"
+                                style="width: 100px;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>
+                        </div>
+                        <div *ngIf="title !== 'Novo'">
+                            <a href="javascript:void(0)" (click)="removeFormaPagamento()" class="btn btn-danger me-2"
+                                style="width: 100px;"><i class="fa fa-trash-o" aria-hidden="true"></i> Excluir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GenericHttpService } from '../../../services/generic-http.service';
 import { IUsuario } from '../../../helpers/models/IUsusario';
 import { AuthService } from '../../../services/auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +12,8 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  
+  @Input() subjectIsOpenMenu = new BehaviorSubject<boolean>(true);
   public usuario: IUsuario | undefined;
 
   constructor(
@@ -23,7 +26,6 @@ export class HeaderComponent {
   }
 
   getUserInfo() {
-
     this._service.get('Usuarios/GetMyUser')
       .subscribe({
         next: (response) => {
@@ -34,5 +36,14 @@ export class HeaderComponent {
           console.error('Erro: ', error);
         }
       })
+  }
+
+  toggleMenu() {
+    this.subjectIsOpenMenu.next(!this.subjectIsOpenMenu.value);
+  }
+
+  logout(){
+    this._serviceAuth.logoutSSOUser();
+    this.usuario = undefined;
   }
 }

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-declare var $: any;
-import 'datatables.net';
 import { GenericHttpService } from '../../../services/generic-http.service';
 import { IUsuario } from '../../../helpers/models/IUsusario';
 import { Router } from '@angular/router';
+declare var $: any;
+import 'datatables.net';
+import { IDataTableConfig } from '../../../helpers/models/DataTableConfig';
 
 @Component({
   selector: 'app-listar-usuarios',
@@ -13,60 +14,23 @@ import { Router } from '@angular/router';
 })
 export class ListarUsuariosComponent {
 
-  modelusuarios: IUsuario[] = [];
-  dtOptions: any = {
-  };
-  /**
-   *
-   */
+  public lbFilterlSearch: string = "";
+  public modelusuarios: IUsuario[] = [];
+  public dtOptions: IDataTableConfig | undefined;
+
   constructor(private _service: GenericHttpService<any>,
     private readonly _router: Router) {
   }
 
   ngOnInit(): void {
-    let lastPage = 0;
-    let lastSearchText = "";
+    this.getDataUsuarios();
+  }
+
+  getDataUsuarios() {
     this.dtOptions = {
-      paging: true,
-      searching: false,
-      responsive: true,
-      dom: '<"top"f>rt<"length-section"l><"bottom"p>',
-      language: {
-        sEmptyTable: 'Nenhum registro encontrado',
-        sInfo: 'Mostrando de _START_ até _END_ de _TOTAL_ registros',
-        sInfoEmpty: 'Mostrando 0 até 0 de 0 registros',
-        sInfoFiltered: '(Filtrados de _MAX_ registros)',
-        sInfoPostFix: '',
-        sInfoThousands: '.',
-        sLengthMenu: '_MENU_ resultados por página',
-        sLoadingRecords: 'Carregando...',
-        sProcessing: 'Processando...',
-        sZeroRecords: 'Nenhum registro encontrado',
-        sSearch: 'Pesquisar',
-        oPaginate: {
-          sNext: '<i class="fa fa-chevron-right"></i>',
-          sPrevious: '<i class="fa fa-chevron-left"></i>',
-          sFirst: 'Primeiro',
-          sLast: 'Último',
-        },
-        oAria: {
-          sSortAscending: ': Ordenar colunas de forma ascendente',
-          sSortDescending: ': Ordenar colunas de forma descendente',
-        },
-      },
-      pagingType: 'simple_numbers',
-      pageLength: 10,
-      displayStart: lastPage, // Last Selected Page
-      search: { search: lastSearchText }, // Last Searched Text
-      serverSide: true,
-      processing: true,
-      autoWidth: false,
-      ordering: true,
-      lengthMenu: ['5', '10', '20'],
       ajax: (dataTablesParameters: any, callback: any) => {
-        lastPage = dataTablesParameters.start;  // Note :  dataTablesParameters.start = page count * table length
-        lastSearchText = dataTablesParameters.search.value;
-        this._service.getDataTableResponse(dataTablesParameters).then((resp: any) => {
+        dataTablesParameters.lbFilterlSearch = this.lbFilterlSearch;
+        this._service.getDataTableResponse(dataTablesParameters, '/usuarios/DataTableUsuarios').then((resp: any) => {
           this.modelusuarios = resp.data;
           callback({
             recordsTotal: resp.recordsTotal,
@@ -88,15 +52,16 @@ export class ListarUsuariosComponent {
         },
         { title: 'Código', data: 'idUsuario', width: '10%' },
         { title: 'Nome', data: 'nome' },
-        { title: 'Usuário', data: 'loginUsuario' },
-
+        { title: 'Usuário', data: 'loginUsuario' }
       ],
     };
+  }
 
+  refreshTable() {
+    $('#dataTableUsuario').DataTable().ajax.reload(null, false); // false mantém a página atual
   }
 
   ngAfterViewInit(): void {
-    // Editar
     $('#dataTableUsuario').on('click', '.editar-usuario', (event: any) => {
       const id = $(event.currentTarget).data('id');
       const usuario = this.modelusuarios.find((c: IUsuario) => c.idUsuario === id);
@@ -108,5 +73,6 @@ export class ListarUsuariosComponent {
       const id = $(event.currentTarget).data('id');
     });
   }
+
   goNewUsuario = () => this._router.navigate(['/usuarios/novo']);
 }

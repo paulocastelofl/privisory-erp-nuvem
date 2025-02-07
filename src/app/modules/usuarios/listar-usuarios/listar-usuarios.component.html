@@ -14,22 +14,17 @@
         <div class="table-card">
           <!-- form group -->
           <div class="row mb-4 forms-search">
-            <!-- Form -->
-            <form class=" ">
               <div class="d-flex" style="column-gap: 1rem;">
                 <div class="d-flex align-items-center col-12 col-md-8 col-lg-3">
                   <span class="position-absolute ps-3 search-icon">
                     <i class="fe fe-search"></i>
                   </span>
-                  <input type="search" class="form-control ps-6" placeholder="Filtrar Usuários" />
+                  <input type="search" class="form-control ps-6" placeholder="Filtrar Usuários" [(ngModel)]="lbFilterlSearch" />
                 </div>
 
-                <button (click)="goNewUsuario()" class="btn btn-primary" style="width: 50px;"><i class="fe fe-search"></i></button>
+                <button (click)="refreshTable()" class="btn btn-primary" style="width: 50px;"><i class="fe fe-search"></i></button>
               </div>
-
-            </form>
           </div>
-
           <table id="dataTableUsuario" class="table table-hover" appDataTablesSettings [dtOptions]="dtOptions"></table>
         </div>
       </div>

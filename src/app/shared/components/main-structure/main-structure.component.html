@@ -1,10 +1,10 @@
 <!-- Wrapper -->
 <div id="db-wrapper">
     <!-- navbar vertical -->
-    <app-navbar-vertical></app-navbar-vertical>
+    <app-navbar-vertical [subjectIsOpenMenu]="subjectIsOpenMenu" ></app-navbar-vertical>
     <!-- Page Content -->
-    <main id="page-content">
-        <app-header></app-header>
+    <main id="page-content" [ngClass]="{'close-menu': !hasOpenOrClose}">
+        <app-header [subjectIsOpenMenu]="subjectIsOpenMenu"></app-header>
         <!-- Container fluid -->
         <section class="container-fluid p-4">
             <router-outlet />

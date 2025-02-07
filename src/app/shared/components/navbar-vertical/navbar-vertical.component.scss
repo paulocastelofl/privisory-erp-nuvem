@@ -1,0 +1,12 @@
+.nav-controller-menu {
+    width: 0;
+}
+
+.nav-controller-menu-open {
+    width: 100% !important;
+    transition: width 0.25s ease-out !important;
+}
+
+.nav-link{
+    font-size: 12px;
+}

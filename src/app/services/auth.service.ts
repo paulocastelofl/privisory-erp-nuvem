@@ -26,6 +26,8 @@ export class AuthService {
 
   get getJwtToken(): string | undefined {
     let tokenJwt: any | undefined = localStorage.getItem('user-erp-nuvem-jwt') ? JSON.parse(localStorage.getItem('user-erp-nuvem-jwt') || "") : undefined;
+
+    if(tokenJwt === undefined) return undefined;
     return tokenJwt.token;
   }
 
@@ -51,6 +53,9 @@ export class AuthService {
 
   isLogged() {
     if (this.getLocalStorageUserERP) {
+
+      if(this.getJwtToken === undefined) return false;
+
       let tokenPayload = this.parseJwt(this.getJwtToken ?? "")
       const expirationTime = tokenPayload.exp;
       const currentTime = Math.floor(Date.now() / 1000);

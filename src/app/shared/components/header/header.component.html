@@ -1,9 +1,9 @@
 <div class="header">
     <!-- navbar -->
     <nav class="navbar-default navbar navbar-expand-lg">
-        <a id="nav-toggle" href="#">
+        <button id="nav-toggle" (click)="toggleMenu()" style="background-color: transparent; border: 0 solid transparent;" >
             <i class="fe fe-menu"></i>
-        </a>
+        </button>
         <!--Navbar nav -->
         <div class="ms-auto d-flex">
             <ul class="navbar-nav navbar-right-wrap ms-2 d-flex nav-top-wrap">
@@ -32,7 +32,7 @@
                                                 <div class="d-flex">
                                                     <img src="../assets/images/avatar/avatar-1.jpg" alt=""
                                                         class="avatar-md rounded-circle" />
-                                                    <div class="ms-3">
+                                                    <!-- <div class="ms-3">
                                                         <h5 class="fw-bold mb-1">Kristin Watson:</h5>
                                                         <p class="mb-3">Krisitn Watsan like your comment on course
                                                             Javascript Introduction!</p>
@@ -43,7 +43,7 @@
                                                             </span>
                                                             <span class="ms-1">2:19 PM</span>
                                                         </span>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </a>
                                         </div>
@@ -59,95 +59,10 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img src="../assets/images/avatar/avatar-2.jpg" alt=""
-                                                        class="avatar-md rounded-circle" />
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Brooklyn Simmons</h5>
-                                                        <p class="mb-3">Just launched a new Courses React for Beginner.
-                                                        </p>
-                                                        <span class="fs-6">
-                                                            <span>
-                                                                <span class="fe fe-thumbs-up text-success me-1"></span>
-                                                                Oct 9,
-                                                            </span>
-                                                            <span class="ms-1">1:20 PM</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-auto text-center me-2">
-                                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Mark as unread"></a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img src="../assets/images/avatar/avatar-3.jpg" alt=""
-                                                        class="avatar-md rounded-circle" />
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Jenny Wilson</h5>
-                                                        <p class="mb-3">Krisitn Watsan like your comment on course
-                                                            Javascript Introduction!</p>
-                                                        <span class="fs-6">
-                                                            <span>
-                                                                <span class="fe fe-thumbs-up text-info me-1"></span>
-                                                                Oct 9,
-                                                            </span>
-                                                            <span class="ms-1">1:56 PM</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-auto text-center me-2">
-                                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Mark as unread"></a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img src="../assets/images/avatar/avatar-4.jpg" alt=""
-                                                        class="avatar-md rounded-circle" />
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Sina Ray</h5>
-                                                        <p class="mb-3">You earn new certificate for complete the
-                                                            Javascript Beginner course.
-                                                        </p>
-                                                        <span class="fs-6">
-                                                            <span>
-                                                                <span class="fe fe-award text-warning me-1"></span>
-                                                                Oct 9,
-                                                            </span>
-                                                            <span class="ms-1">1:56 PM</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-auto text-center me-2">
-                                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Mark as unread"></a>
-                                        </div>
-                                    </div>
-                                </li>
                             </ul>
                             <div class="border-top px-3 pt-3 pb-0">
                                 <a href="../pages/notification-history.html" class="text-link fw-semibold">See all
-                                    Notifications</a>
+                                    Notificações</a>
                             </div>
                         </div>
                     </div>
@@ -208,30 +123,24 @@
                                 </ul>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="../pages/profile-edit.html">
+                                <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="fe fe-user me-2"></i>
-                                    Profile
+                                    Perfil
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="../pages/student-subscriptions.html">
-                                    <i class="fe fe-star me-2"></i>
-                                    Subscription
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="fe fe-settings me-2"></i>
-                                    Settings
+                                    Configurações
                                 </a>
                             </li>
                         </ul>
                         <div class="dropdown-divider"></div>
                         <ul class="list-unstyled">
                             <li>
-                                <a class="dropdown-item" href="../index.html">
+                                <a class="dropdown-item" href="javascript:void(0)" (click)="logout()">
                                     <i class="fe fe-power me-2"></i>
-                                    Sign Out
+                                    Sair
                                 </a>
                             </li>
                         </ul>

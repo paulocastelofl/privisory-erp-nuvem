@@ -47,8 +47,8 @@
                         </div>
                         <div class="mb-4 col-2">
                             <div class="d-flex flex-column">
-                                <label class="form-check-label mb-1" for="exampleCheck1">Ativo:</label>
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label mb-1" for="checkAtivo">Ativo:</label>
+                                <input type="checkbox" class="form-check-input" id="checkAtivo" formControlName="Ativo">
                             </div>
                         </div>
                         <!-- form group -->
@@ -69,13 +69,16 @@
                         <div class="mb-4 col-6">
                             <label class="form-label">
                                 Confirmar Senha
-                                <span class="text-danger" *ngIf="isFieldRequired('Senha')">*</span>
+                                <span class="text-danger" *ngIf="isFieldRequired('ConfirmarSenha')">*</span>
                             </label>
-                            <input type="password" class="form-control" required formControlName="Senha" />
-                            <div class="text-danger" *ngIf="form.get('Senha')?.touched && form.get('Senha')?.invalid">
-                                <small *ngIf="form.get('Senha')?.errors?.['required']">Senha é obrigatória.</small>
-                                <small *ngIf="form.get('Senha')?.errors?.['minlength']">
+                            <input type="password" class="form-control" required formControlName="ConfirmarSenha" />
+                            <div class="text-danger" *ngIf="form.get('ConfirmarSenha')?.touched && form.get('ConfirmarSenha')?.invalid">
+                                <small *ngIf="form.get('ConfirmarSenha')?.errors?.['required']">Senha é obrigatória.</small>
+                                <small *ngIf="form.get('ConfirmarSenha')?.errors?.['minlength']">
                                     A senha deve ter pelo menos 8 caracteres.
+                                </small>
+                                <small *ngIf="form.get('ConfirmarSenha')?.errors?.['passwordMismatch']">
+                                    As senhas não coincidem.
                                 </small>
                             </div>
                         </div>
@@ -86,8 +89,9 @@
                                 Comissão de Vendas (%):
                             </label>
                             <div class="input-group me-3">
-                                <input class="form-control" aria-describedby="basic-addon3" formControlName="Telefone"
-                                    mask="(00) 0 0000 0000" prefix="+55 " type="tel" />
+                                <input class="form-control" aria-describedby="basic-addon3"
+                                    formControlName="ComissaoVendas" currencyMask type="text"
+                                    [options]="{ prefix: '', suffix: '%', thousands: '.', decimal: ',' }" />
                             </div>
                         </div>
 
@@ -97,8 +101,9 @@
                                 Limite de Desconto (%):
                             </label>
                             <div class="input-group me-3">
-                                <input class="form-control" aria-describedby="basic-addon3" formControlName="Telefone"
-                                    mask="(00) 0 0000 0000" prefix="+55 " type="tel" />
+                                <input class="form-control" aria-describedby="basic-addon3"
+                                    formControlName="PercentualLimiteDesconto" currencyMask type="text"
+                                    [options]="{ prefix: '', suffix: '%', thousands: '.', decimal: ',' }" />
                             </div>
                         </div>
 
@@ -109,7 +114,7 @@
                             </label>
                             <div class="input-group me-3">
                                 <input class="form-control" aria-describedby="basic-addon3" formControlName="Telefone"
-                                    mask="(00) 0 0000 0000" prefix="+55 " type="tel" />
+                                    mask="(00) 0 0000 0000" type="tel" />
                             </div>
                         </div>
 
@@ -119,9 +124,9 @@
                                 Salário Mensal:
                             </label>
                             <div class="input-group me-3">
-                                <input class="form-control" type="text" aria-describedby="basic-addon3"
-                                    formControlName="Cpf" mask="000.000.000-00" inputmode="numeric"
-                                    placeholder="R$ 0,00" />
+                                <input class="form-control" type="text" aria-describedby="basic-addon3" currencyMask
+                                    formControlName="SalarioMensal"
+                                    [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="R$ 0,00" />
                             </div>
                         </div>
 
@@ -132,7 +137,7 @@
                             </label>
                             <div class="input-group me-3">
                                 <input class="form-control" type="text" aria-describedby="basic-addon3"
-                                    formControlName="Rg" mask="00.000.000-0" inputmode="numeric" placeholder="RG" />
+                                    formControlName="Rg" inputmode="numeric" placeholder="RG" />
                             </div>
                         </div>
 
@@ -153,7 +158,8 @@
                                 Endereço:
                             </label>
                             <div class="input-group me-3">
-                                <input class="form-control" type="text" aria-describedby="basic-addon3" />
+                                <input class="form-control" type="text" aria-describedby="basic-addon3"
+                                    formControlName="Endereco" />
                             </div>
                         </div>
 
@@ -163,48 +169,43 @@
                             <div class="mb-4">
                                 <div class="d-flex flex-column">
                                     <label class="form-check-label mb-1" for="exampleCheck1">Usuário Master:</label>
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <input type="checkbox" class="form-check-input" formControlName="UsuarioMaster">
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <div class="d-flex flex-column">
                                     <label class="form-check-label mb-1" for="exampleCheck1">É Vendedor:</label>
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <input type="checkbox" class="form-check-input" formControlName="EhVendedor">
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <div class="d-flex flex-column">
                                     <label class="form-check-label mb-1" for="exampleCheck1">É Entregador:</label>
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <input type="checkbox" class="form-check-input" formControlName="EhEntregador">
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <div class="d-flex flex-column">
                                     <label class="form-check-label mb-1" for="exampleCheck1">É Técnico:</label>
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <input type="checkbox" class="form-check-input" formControlName="EhTecnico">
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <div class="d-flex flex-column">
                                     <label class="form-check-label mb-1" for="exampleCheck1">Usa PDV Como
                                         utilitário:</label>
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <input type="checkbox" class="form-check-input"
+                                        formControlName="UsaPdvComoUtilitario">
                                 </div>
                             </div>
                             <div class="mb-4">
                                 <div class="d-flex flex-column">
                                     <label class="form-check-label mb-1" for="exampleCheck1">Comanda Eletrônica:</label>
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <div class="d-flex flex-column">
-                                    <label class="form-check-label mb-1" for="exampleCheck1">É Totem:</label>
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <input type="checkbox" class="form-check-input"
+                                        formControlName="EhComandaEletronica">
                                 </div>
                             </div>
                         </div>
-
 
                         <!-- form group -->
                         <div class="mb-4 mt-2 col-12">
@@ -214,18 +215,25 @@
                     </form>
                     <div class="d-flex justify-content-between">
                         <div>
-                            <a href="javascript:void(0)" (click)="goNewUsuario()" class="btn btn-success me-2">
+                            <a href="javascript:void(0)" (click)="goNewUsuario()" class="btn btn-success me-2" style="width: 100px;">
                                 <i class="fa fa-plus" aria-hidden="true"></i> Novo
                             </a>
-                            <a href="javascript:void(0)" (click)="createOrEdtitUsuario()" class="btn btn-primary me-2">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Gravar
+
+                            <a href="javascript:void(0)" (click)="createOrEdtitUsuario()" class="btn btn-primary me-2" style="width: 100px;">
+                                <div *ngIf="showLoading" class="spinner-border spinner-border-sm text-light"
+                                    role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <span *ngIf="!showLoading">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Gravar
+                                </span>
                             </a>
 
-                            <a href="javascript:void(0)" (click)="goToBack()" class="btn btn-primary me-2"><i
+                            <a href="javascript:void(0)" (click)="goToBack()" class="btn btn-primary me-2" style="width: 100px;"><i
                                     class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</a>
                         </div>
-                        <div>
-                            <a href="javascript:void(0)" (click)="goToBack()" class="btn btn-danger me-2"><i
+                        <div *ngIf="title !== 'Novo'">
+                            <a href="javascript:void(0)" (click)="removeUsuario()" class="btn btn-danger me-2" style="width: 100px;"><i
                                     class="fa fa-trash-o" aria-hidden="true"></i> Excluir</a>
                         </div>
                     </div>
